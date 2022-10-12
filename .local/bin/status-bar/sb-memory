@@ -1,0 +1,2 @@
+#!/bin/sh
+printf "%s\t%s" "🧠" "$(free -h | awk '/Mem/ {print $3 "/" $2}')"

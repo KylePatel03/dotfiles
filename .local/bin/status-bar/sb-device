@@ -1,0 +1,31 @@
+#!/bin/bash
+
+display() {
+   mountable_drive_count="$(lsblk -lo "PATH,UUID,SIZE,TYPE,MOUNTPOINTS" | grep -E "part\s+$" | wc -l)"
+   unmountable_drive_count="$(lsblk -lo "PATH,UUID,SIZE,TYPE,MOUNTPOINTS" | grep -E "/mnt" | grep -v "HDD" | wc -l)"
+   echo -e "\t${unmountable_drive_count}"
+}
+
+mount_drive() {
+   drive="$(lsblk -lo "PATH,UUID,SIZE,TYPE,MOUNTPOINTS" | grep -E "part\s+$" | rofi -p "Mount" -dmenu)"
+   [ -z "$drive" ] && exit
+   drive="$(echo "$drive" | cut -d " " -f 1)"
+   echo "Mounting ${drive}..."
+   mount "${drive}"
+}
+
+unmount_drive() {
+   drive="$(lsblk -lo "PATH,UUID,SIZE,TYPE,MOUNTPOINTS" | grep -E "/mnt" | grep -v "HDD" | rofi -p "Unmount" -dmenu)"
+   [ -z "$drive" ] && exit
+   drive="$(echo "$drive" | cut -d " " -f 1)"
+   echo "Unmounting ${drive}..."
+   umount "${drive}"
+}
+
+[ -z "$1" ] && echo "Expected an argument" && exit 1
+case "$1" in
+   0) display ;;
+   1) mount_drive ;;
+   2) unmount_drive ;;
+   *) exit 1 ;;
+esac

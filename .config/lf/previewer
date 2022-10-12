@@ -1,0 +1,8 @@
+#!/bin/sh
+mime="$(file -b --mime-type "$1")"
+case "$mime" in
+   text/*) cat "$1" ;;
+   inode/directory) ls "$1" ;;
+   #inode/directory) tree --noreport -aL 1 "$1" ;;
+   *) file -b "$1" ;;
+esac

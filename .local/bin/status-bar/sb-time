@@ -1,0 +1,3 @@
+#!/bin/sh
+am_pm="$(date '+%p' | tr '[:lower:]' '[:upper:]')"
+printf "%s\t%s %s" 📆 "$(date '+%a %d %b %y - %I:%M')" "$am_pm"

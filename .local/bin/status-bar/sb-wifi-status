@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# "Active SSID Name:Type"
+active_ssid="$(nmcli -g "NAME,TYPE" connection show --active --order +active | head -n 1 )"
+ssid="${active_ssid%:*}"
+type="${active_ssid#*:}"
+status="$(nmcli -f GENERAL.STATE connection show "$ssid")"
+status="${status##* }"
+
+printf "%s %s (%s) : %s" 🌐 "$ssid" "$type" "$status"

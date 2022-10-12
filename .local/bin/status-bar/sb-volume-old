@@ -1,0 +1,15 @@
+#!/bin/sh
+
+[ "$(pamixer --get-mute)" = true ] && printf "%s" 🔇 && exit 0
+
+vol="$(pamixer --get-volume)"
+
+if [ "$vol" -ge 70 ]; then
+	icon="🔊"
+elif [ "$vol" -le 30 ]; then
+	icon="🔈"
+else
+	icon="🔉"
+fi
+
+printf "%s\t%s%%" "$icon" "$vol"

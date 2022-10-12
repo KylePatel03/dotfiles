@@ -1,0 +1,16 @@
+# UI Edits
+set statusbar-h-padding 0
+set statusbar-v-padding 0
+set page-padding 1
+set window-title-basename true
+
+# Zoom in and out with Ctrl+, Ctrl-
+# Ctrl0 resets zoom
+map [normal] <C-=> zoom in
+map [normal] <C--> zoom out
+map [normal] <C-0> zoom default
+
+map [normal] u scroll half-up
+map [normal] d scroll half-down
+map [normal] r reload
+map [normal] R rotate

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+choice="$(echo -e "\tLock\n\tLogout\n\tShutdown\n\tReboot\n \tSleep" | rofi -dmenu -p "Power" -config "$HOME/.config/rofi/powermenu.rasi" | cut -f2)"
+
+case "$choice" in
+   "Lock") lockscreen ;;
+   "Logout") loginctl terminate-user "$(whoami)" ;;
+   "Shutdown") systemctl poweroff ;;
+   "Reboot") systemctl reboot ;;
+   "Sleep") pamixer --mute ; systemctl suspend ;; 
+   *) exit 1 ;; 
+esac

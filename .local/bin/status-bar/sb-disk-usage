@@ -1,0 +1,3 @@
+#!/bin/sh
+usage="$(df -h --output="used,avail,pcent" / | awk 'FNR==2 {print $1 "/" $2 " (" $3 ")"}')"
+printf "%s\t%s" "💾" "${usage}"

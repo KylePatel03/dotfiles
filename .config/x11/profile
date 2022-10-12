@@ -1,0 +1,10 @@
+#!/bin/sh
+
+main() {
+   change-wallpaper &
+   dunst &
+   mpd &
+   /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+}
+
+main "$@" 1> /dev/null 2>&1

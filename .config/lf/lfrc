@@ -1,0 +1,66 @@
+set shell sh
+set hidden true
+set shellopts '-eu'
+set ifs "\n"
+set filesep "\n"
+set scrolloff 10
+set anchorfind off
+set autoquit off
+set drawbox on
+set ignorecase on
+set period 5
+
+set preview on
+set previewer ~/.config/lf/previewer
+
+map <enter> shell
+
+map zh set hidden!
+map zr set reverse!
+map zd set dironly!
+map zn set info
+map zs set info size
+map zt set info time
+map za set info size:time
+
+map sn :set sortby natural; set info
+map ss :set sortby size; set info size
+map st :set sortby time; set info time
+map sa :set sortby atime; set info atime
+map sc :set sortby ctime; set info ctime
+map se :set sortby ext; set info
+
+map <space> :toggle; down
+
+# Movement
+map gr cd /
+map gM cd /mnt/
+map gh cd ~
+map gc cd ~/.config/
+map gs cd ~/.local/bin/
+map gd cd ~/Downloads/
+map gS cd ~/Sync/
+map gm cd ~/Sync/Music/
+map gp cd ~/Sync/Pictures/
+map gv cd ~/Sync/Videos/
+
+# Functions
+
+# Open a file
+cmd open ${{
+   case $(file --mime-type "$(readlink -f $f)" -b) in
+      text/*) $EDITOR "$f" ;;
+      *) xdg-open "$f" ;;
+   esac
+}}
+
+# Provides a prompt to delete selected/toggled files
+cmd delete ${{
+   set -f
+   printf "$fx\nTrash?[y/n]\n"
+   read ans
+   [ "$ans" = "y" ] && rm -rf "$fx"
+}}
+
+# Bindings
+map D delete

@@ -1,0 +1,9 @@
+#!/bin/sh
+# Control-X (C-x) then keystroke
+
+while read -r file
+do
+   case "$1" in
+      "b") change-wallpaper "$file" ;;
+   esac
+done

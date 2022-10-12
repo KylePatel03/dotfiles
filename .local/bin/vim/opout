@@ -1,0 +1,8 @@
+#!/bin/sh
+# https://github.com/LukeSmithxyz/voidrice/blob/master/.local/bin/opout
+# opout: "open output": A general handler for opening a file's intended output, usually the pdf of a compiled document in vim
+
+basename="$(echo "${*}" | sed 's/\.[^\/.]*$//')"
+case "${*}" in
+   *.md ) setsid -f xdg-open "$basename.pdf" > /dev/null 2>&1 ;;
+esac

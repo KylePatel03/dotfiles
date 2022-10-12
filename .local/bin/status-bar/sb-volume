@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [ "$(pamixer --get-mute)" = true ] ; then
+   echo "🔇"
+   exit 0
+fi
+
+icon="🔊"
+if [ "$(pamixer --get-default-sink | grep "WH-1000XM5")" ] ; then
+   icon=""
+fi
+
+vol="$(pamixer --get-volume)"
+echo -e "${icon}\t${vol}%"

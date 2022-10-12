@@ -1,0 +1,13 @@
+[Default Applications]
+text/x-shellscript=text.desktop;
+text/plain=text.desktop;
+application/json=text.desktop;
+application/postscript=pdf.desktop;
+application/pdf=pdf.desktop;
+image/png=img.desktop;
+image/jpeg=img.desktop;
+image/gif=img.desktop;
+inode/directory=file.desktop
+
+[Added Associations]
+application/octet-stream=nvim.desktop;mpv.desktop;

@@ -1,0 +1,20 @@
+#!/bin/sh
+# Given an image, set the desktop background and update the lockscreen to it
+# Otherwise, use the default background image
+background_image="$HOME/.local/share/bg"
+
+set_background() {
+   cp "$1" "$background_image"
+   xwallpaper --center "$1"
+}
+
+set_lockscreen() {
+   betterlockscreen -u "$1"
+}
+
+main() {
+   image="${1:-$background_image}"
+   set_background "$image" && set_lockscreen "$image"
+}
+
+main "$@" 1> /dev/null 2>&1
